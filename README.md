@@ -60,28 +60,6 @@ Tự động sinh biểu đồ Loss / Accuracy
 
 Hỗ trợ resume training (train tiếp từ checkpoint trước đó)
 
-📁 Cấu trúc thư mục
-📦 GenderAgeAI
-│
-├── models/
-│   ├── gender_model.keras
-│   ├── age_model.keras
-│
-├── src/
-│   ├── train_age.py
-│   ├── train_gender.py
-│   ├── realtime_detect.py
-│
-├── static/
-│   ├── uploads/
-│   ├── results/
-│
-├── templates/
-│   ├── index.html
-│
-├── requirements.txt
-├── run.py
-└── README.md
 
 ▶️ Chạy demo Flask
 Cài thư viện
