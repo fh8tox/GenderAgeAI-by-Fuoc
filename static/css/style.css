@@ -1,0 +1,121 @@
+/* --- Tổng quan --- */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f7fb;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+/* --- Tabs --- */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.tab-button {
+  background: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 4px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.tab-button.active {
+  background: #3498db;
+  color: white;
+}
+
+.tab-button:hover {
+  background: #2980b9;
+  color: white;
+}
+
+/* --- Nội dung tab --- */
+.tab-content {
+  display: none;
+  border-top: 2px solid #3498db;
+  padding: 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Camera & Upload --- */
+video, img {
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.result-frame {
+  width: 420px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  background: #fafafa;
+}
+
+/* --- Nút --- */
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* --- Upload form --- */
+form {
+  margin-top: 15px;
+}
+
+input[type="file"] {
+  margin-right: 10px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  video, img, .result-frame {
+    width: 95%;
+  }
+}

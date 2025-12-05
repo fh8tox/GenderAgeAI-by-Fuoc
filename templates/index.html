@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Gender & Age AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a56b.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container {
+      margin-top: 40px;
+      max-width: 800px;
+    }
+    .tab-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    img {
+      border-radius: 10px;
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+    }
+    .btn {
+      min-width: 120px;
+    }
+    #camera-feed-off {
+      display: none;
+      background: #333;
+      color: #fff;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4 fw-bold">Nhận dạng giới tính và dự đoán tuổi</h2>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active" id="tab-camera" data-bs-toggle="tab" data-bs-target="#camera-section" type="button" role="tab">
+        <i class="fas fa-camera"></i> Camera
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="tab-image" data-bs-toggle="tab" data-bs-target="#image-section" type="button" role="tab">
+        <i class="fas fa-image"></i> Ảnh
+      </button>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content mt-3">
+
+    <!-- CAMERA TAB -->
+    <div class="tab-pane fade show active" id="camera-section" role="tabpanel">
+      <div class="text-center mb-2">
+        <button id="toggle-camera" class="btn btn-success">
+          <i class="fas fa-power-off"></i> Bật Camera
+        </button>
+      </div>
+
+      <img id="camera-feed" src="" alt="Camera Feed">
+      <div id="camera-feed-off">Camera đã tắt</div>
+
+      <div class="alert alert-info mt-3 text-center">
+        <i class="fas fa-info-circle"></i> Camera realtime với dự đoán tuổi & giới tính.
+      </div>
+    </div>
+
+    <!-- IMAGE TAB -->
+    <div class="tab-pane fade" id="image-section" role="tabpanel">
+      <div class="text-center">
+        <form action="/predict_image" method="post" enctype="multipart/form-data">
+          <input type="file" name="image" accept="image/*" class="form-control mb-3" required>
+          <button type="submit" class="btn btn-primary mt-2">
+            <i class="fas fa-search"></i> Nhận diện
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let cameraOn = false;
+const img = document.getElementById('camera-feed');
+const offDiv = document.getElementById('camera-feed-off');
+const toggleBtn = document.getElementById('toggle-camera');
+
+toggleBtn.addEventListener('click', () => {
+    cameraOn = !cameraOn;
+    if(cameraOn){
+        img.src = "{{ url_for('video_feed') }}";
+        img.style.display = 'block';
+        offDiv.style.display = 'none';
+        toggleBtn.classList.remove('btn-success');
+        toggleBtn.classList.add('btn-danger');
+        toggleBtn.innerHTML = '<i class="fas fa-power-off"></i> Tắt Camera';
+    } else {
+        img.src = '';
+        img.style.display = 'none';
+        offDiv.style.display = 'flex';
+        toggleBtn.classList.remove('btn-danger');
+        toggleBtn.classList.add('btn-success');
+        toggleBtn.innerHTML = '<i class="fas fa-power-off"></i> Bật Camera';
+    }
+});
+</script>
+
+</body>
+</html>
